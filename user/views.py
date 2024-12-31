@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
-from .forms import EmailAuthenticationForm, UserRegisterForm
+from .forms import UserRegisterForm
 
 
 def register(request):
@@ -14,5 +14,5 @@ def register(request):
     return render(request, "user/register.html", {"form": form})
 
 
-class EmailLoginView(LoginView):
-    authentication_form = EmailAuthenticationForm
+# class EmailLoginView(LoginView):
+#     authentication_form = EmailAuthenticationForm

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'room.apps.RoomConfig',
     'user.apps.UserConfig',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -73,10 +74,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'secret_santa.wsgi.application'
 
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "user.auth_backends.EmailBackend",
-]
+# AUTHENTICATION_BACKENDS = [
+#     "django.contrib.auth.backends.ModelBackend",
+#     "user.auth_backends.EmailBackend",
+# ]
+
+AUTH_USER_MODEL = "user.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

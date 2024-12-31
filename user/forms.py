@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import CustomUser as User
 
 
 class UserRegisterForm(UserCreationForm):
@@ -22,10 +23,3 @@ class UserRegisterForm(UserCreationForm):
     #     self.fields["password2"].widget.attrs.update({"class": "form-control"})
     # for field in self.fields.values():
     #   field.widget.attrs["class"] = "form-control"
-
-
-class EmailAuthenticationForm(AuthenticationForm):
-    username = forms.EmailField(
-        label="Email",
-        widget=forms.TextInput(attrs={"autofocus": True, "placeholder": "email@example.com"})
-    )
