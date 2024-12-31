@@ -1,0 +1,7 @@
+{% extends "core/layout.html" %}
+
+{% block content %}
+Admin: {{ object.admin.first_name }} {{ object.admin.last_name }}
+<br>
+Participants: {{ object.participants.all }}
+{% endblock content %}
