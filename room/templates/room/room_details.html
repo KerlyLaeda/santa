@@ -4,4 +4,9 @@
 Admin: {{ object.admin.first_name }} {{ object.admin.last_name }}
 <br>
 Participants: {{ object.participants.all }}
+
+<!-- For room admin only -->
+{% if user == object.admin %}
+    <a href="{% url 'invite' object.pk %}">Invite participants</a>
+{% endif %}
 {% endblock content %}

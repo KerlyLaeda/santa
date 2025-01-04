@@ -1,0 +1,16 @@
+{% extends "core/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Invite friends to room {{ room.name }}</h2>
+    <form method="post" action="{% url 'invite' room.id %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="recipient_list" class="form-label">Enter email addresses (comma-separated):</label>
+            <textarea name="recipient_list" id="recipient_list" rows="3" class="form-control mt-3" placeholder="email1@example.com, email2@example.com"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3 mt-3">Invite</button>
+    </form>
+</div>
+{% endblock content %}
