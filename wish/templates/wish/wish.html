@@ -1,0 +1,20 @@
+{% extends "core/layout.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Make Your Wish</h2>
+        <p>Write your wish for the Secret Santa exchange in {{ room.name }}. Please keep in mind cost limit and some more explanatory text</p>
+        <!-- The draw has started, you can no longer edit your wish. Add after disabling editing in views -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">
+                {% if wish_exists %}
+                    Edit Wish
+                {% else %}
+                    Make a Wish
+                {% endif %}
+            </button>
+        </form>
+</div>
+{% endblock content %}

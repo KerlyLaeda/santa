@@ -26,9 +26,19 @@
                             <a class="nav-link" href="{% url 'register' %}">Register</a>
                         </li>
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Profile</a>
-                        </li>
+                        {% if room %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'room_details' room.id %}">My Room</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'make_wish' room.id %}">My Wishes</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'create_room' %}">Create Room</a>
+                            </li>
+                        {% endif %}
+
                         <li class="nav-item">
                             <form method="post" action="{% url 'logout' %}">
                                 {% csrf_token %}
