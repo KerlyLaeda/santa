@@ -24,4 +24,5 @@ urlpatterns = [
     path("room/", include("room.urls")),
     path("user/", include("user.urls")),
     path("wish/", include("wish.urls")),
+    path("assignment/", include("assignment.urls"))
 ]

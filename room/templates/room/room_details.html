@@ -9,4 +9,11 @@ Participants: {{ object.participants.all }}
 {% if user == object.admin %}
     <a href="{% url 'invite' object.pk %}">Invite participants</a>
 {% endif %}
+
+{% if user == object.admin and not object.draw_started %}
+    <a href="{% url 'start_draw' object.pk %}" class="btn btn-success">Start Draw</a>
+{% endif %}
+
+<!-- Display assignee's name for Santa -->
+
 {% endblock content %}

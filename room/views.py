@@ -1,11 +1,11 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView
 from .models import Room
-from .utils import send_invitation
+from .utils import draw, notify_participants, send_invitation
 
 
 class RoomCreateView(LoginRequiredMixin, CreateView):
@@ -74,3 +74,25 @@ def invite(request, room_id):
         return redirect("room_details", pk=room.id)
 
     return render(request, "room/room_invitation.html", {"room": room})
+
+
+@login_required
+@user_passes_test(lambda u: u.is_authenticated)
+def start_draw(request, room_id):
+    room = get_object_or_404(Room, id=room_id)
+
+    if request.user != room.admin:
+        messages.warning(request, "Only the admin can start the draw.")
+        return redirect("room_details", pk=room_id)
+
+    if room.draw_started:
+        messages.warning(request, "The draw has already started.")
+        return redirect("room_details", pk=room_id)
+
+    draw(room)
+    messages.success(request, "The draw was successfully completed!")
+    notify_participants(room)
+    return redirect("room_details", pk=room_id)
+
+
+

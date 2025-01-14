@@ -24,6 +24,7 @@ class Room(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
     participants = models.ManyToManyField(User, related_name="rooms")
     invitation_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    draw_started = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Room {self.name} (admin: {self.admin.first_name} {self.admin.last_name})"
